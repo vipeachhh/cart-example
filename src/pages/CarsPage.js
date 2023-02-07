@@ -22,6 +22,7 @@ function HomePage() {
     //carList,
   } = useSelector((state) => state.carsSlice);
   const { cart } = useSelector((state) => state.cartSlice);
+  console.log(cart)
 
   const dispatch = useDispatch();
 
@@ -53,13 +54,13 @@ function HomePage() {
               .filter((item) => item.name.toLowerCase().includes(input))
               .map((item) => {
                 return (
-                  <div>
+        
                     <CarsItem
-                      onClick={() => dispatch(selectedCar(item))}
+                      inCart={cart.filter(ci => ci.name === item.name).length > 0}
                       key={item.id}
                       item={item}
                     ></CarsItem>
-                  </div>
+
                 );
               })}
           </div>

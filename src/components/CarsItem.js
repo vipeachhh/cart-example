@@ -21,36 +21,13 @@ const StyledButtonDelete = styled.button`
   margin-left: 10px;
 `;
 
-export default function CarsItem(item, onClick) {
-  const [isShown, setIsShown] = useState(false);
 
-  const handleClick = (event) => {
-    setIsShown((current) => !current);
-    console.log();
-  };
+
+function StyledButtonAddPro({ onClick }) {
 
   return (
     <div>
-      <div>
-        Name:{" "}
-        <div onClick={onClick} key={item.id} style={{ color: "blue" }}>
-          {item.name}
-        </div>
-      </div>
-      <div>
-        Price: <b>{item.price}</b>
-      </div>{" "}
-      <StyledButtonAddPro onClick={handleClick}></StyledButtonAddPro>
-      {isShown && <StyledButtonDeletePro />}
-    </div>
-  );
-}
-
-function StyledButtonAddPro(item) {
-  const dispatch = useDispatch();
-  return (
-    <div>
-      <StyledButtonAdd onClick={() => dispatch(addToCart(item))} />
+      <StyledButtonAdd onClick={onClick} />
     </div>
   );
 }
@@ -59,6 +36,33 @@ function StyledButtonDeletePro() {
   return (
     <div>
       <StyledButtonDelete />
+    </div>
+  );
+}
+
+
+
+export default function CarsItem({ item, inCart }) {
+  const dispatch = useDispatch();
+
+  const handleClick = (event) => {
+     dispatch(addToCart(item))
+  };
+
+  return (
+    <div>
+      <div>
+        Name:{" "}
+        <div style={{ color: "blue" }}>
+          {item.name}
+        </div>
+      </div>
+      <div>
+        Price: <b>{item.price}</b>
+      </div>{" "}
+
+      <StyledButtonAddPro onClick={handleClick}></StyledButtonAddPro>
+      {inCart && <StyledButtonDeletePro />}
     </div>
   );
 }
