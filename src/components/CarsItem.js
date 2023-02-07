@@ -26,6 +26,7 @@ export default function CarsItem(item, onClick) {
 
   const handleClick = (event) => {
     setIsShown((current) => !current);
+    console.log();
   };
 
   return (
